@@ -21,8 +21,9 @@ public class TextPanel extends JPanel
 
         //Handling text attirbutes
         SimpleAttributeSet attributes = new SimpleAttributeSet();
+        Style style = Notes.addStyle("Style", null );
         StyleConstants.setCharacterAttributes(attributes, true);
-          
+        StyledDocument document = Notes.getStyledDocument();
         //Get custom font
           
           
@@ -54,15 +55,17 @@ public class TextPanel extends JPanel
         Color.addActionListener((ActionEvent e) -> 
         {
             System.out.println("Change color.");
+            Color color_of_text = TextColor.getColor();
+            StyleConstants.setForeground(style, color_of_text);
+            try {document.insertString(document.getLength(), Notes.getText(), style);}
+            catch(BadLocationException f){}
         });     
         
         
         //Buttons + Colorpicker to set the text color
-
-          //Adding to panel/ScrollPane, and handling other things.
-          NotePad.add(Notes);
-          add(Header); add(Color); add(TextColor); add(Load); add(NotePad);
-     }
-
-
+        //Adding to panel/ScrollPane, and handling other things.
+ 
+        NotePad.add(Notes);
+        add(Header); add(Color); add(TextColor); add(Load); add(NotePad);
+   }
 }
