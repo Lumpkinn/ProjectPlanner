@@ -1,44 +1,63 @@
-import java.awt.event.ActionListener;
-
-import javax.swing.*;
-
+import java.awt.*; import java.awt.event.*;
+import javax.swing.*; import javax.swing.filechooser.*; import javax.swing.text.*;
+import java.util.*; import java.io.File;
 public class TextPanel extends JPanel
 {
      //All the widgets for the Panel
      
      //Basic setup, like the text input field, and the header for the file.
+     @SuppressWarnings("FieldMayBeFinal")
      private JLabel Header = new JLabel("Notepad");
      private JScrollPane NotePad = new JScrollPane();
      //Notepad, and text color
-     private JTextPane Notes = new JTextArea("Add your ideas here!");
+     private JTextPane Notes = new JTextPane();
      private JColorChooser TextColor = new JColorChooser();
      
      public TextPanel()
      {    
-          //JButtons for loading text, and setting color
-          JButton Color = new JButton("Pick text color");
-          JButton Load = new JButton("Load Text");
+        //JButtons for loading text, and setting color
+        JButton Color = new JButton("Pick text color");
+        JButton Load = new JButton("Load Text");
+
+        //Handling text attirbutes
+        SimpleAttributeSet attributes = new SimpleAttributeSet();
+        StyleConstants.setCharacterAttributes(attributes, true);
           
-          //Get custom font
-          Notes.setLineWrap(true);
+        //Get custom font
           
-          //For Loading text
-          Load.addActionListener(new ActionListener() {
-               public void actionPerformed(ActionEvent e){
-                    final JFileChooser Filepick = new JFileChooser();
-                    //!Make sure that this works, and only allows the user to select .txt files!
-                    JFileChooser.FILE_FILTER_CHANGED_PROPERTY = "txt";
-               }
+          
+        //For Loading text from files
+        Load.addActionListener((ActionEvent e) -> 
+        {
+            JFileChooser Filepick = new JFileChooser();
+            Filepick.addChoosableFileFilter(new FileNameExtensionFilter("Text Files","txt"));
+            Filepick.showOpenDialog(null);
+            File file = Filepick.getSelectedFile();
+            try (Scanner reader = new Scanner(file))
+            {
+                String data = "";
+                while (reader.hasNextLine())
+                {
+                    data.concat(reader.nextLine());
+                }
+                Notes.setText(data);
+            }
+             
+            catch(Exception exception)
+            { 
+                System.out.println("An Error has occurred.");
+            }
           });
 
 
-          //For custom text color
-          Color.addActionListener(new ActionListener() {
-               public void actionPerformed(ActionEvent e){
-                    System.out.println("Change color.");
-               }
-          });     
-          //Buttons + Colorpicker to set the text color
+        //For custom text color
+        Color.addActionListener((ActionEvent e) -> 
+        {
+            System.out.println("Change color.");
+        });     
+        
+        
+        //Buttons + Colorpicker to set the text color
 
           //Adding to panel/ScrollPane, and handling other things.
           NotePad.add(Notes);
