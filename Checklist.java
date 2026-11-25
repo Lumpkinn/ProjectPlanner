@@ -1,8 +1,9 @@
 import java.awt.event.*;
 import javax.swing.*;
-//TODO: Fix error that exits out of the entire program when the JOptionPane is closed.
+//TODO: Get Checkboxes to show up properly!
 public class Checklist extends JPanel
 {
+
      public Checklist()
      {
           JPanel ChecklistPanel = new JPanel();

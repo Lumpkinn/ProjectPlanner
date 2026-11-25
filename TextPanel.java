@@ -10,13 +10,13 @@ private static Color color_of_text = (Color.black);
         //Basic setup, like the text input field, and the label for the widget
         JLabel Header = new JLabel("Notepad");
         
-        
         //Notepad, and text color
+        //!THE JSCROLLPANE DOESN'T SUPPORT TEXT COLOR!!!
         JTextArea Notes = new JTextArea("Add text here!");
         Notes.setEditable(true);
-        //!THE JSCROLLPANE DOESN'T SUPPORT TEXT COLOR!!!
         JScrollPane NotePad = new JScrollPane(Notes); 
         
+
         //JButtons for loading text, and setting color
         JButton Color = new JButton("Pick text color");
         JButton Load = new JButton("Load Text");
@@ -65,7 +65,8 @@ private static Color color_of_text = (Color.black);
         //For custom text color
         Color.addActionListener((ActionEvent e) -> 
         {
-            //This code block makes a new window, and show the colorpanel inside of it to let the user pick whatever they want...
+            
+            //*This code block makes a new window, and show the colorpanel inside of it to let the user pick whatever they want...
             JFrame ColorWindow = new JFrame("Pick a color");
             ColorWindow.setUndecorated(false);
             ColorWindow.setResizable(false);

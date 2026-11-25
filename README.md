@@ -15,6 +15,13 @@ Current features include:
      <ol>Sketchpad</ol>
      <ol>To do list</ol>
      </li>
+Possible ideas for future releases:
+<li>
+     <ol>Add in a custom file type to save all of your information!</ol>
+     <ol>Custom icons!</ol>
+     <ol>Ambient noise/bg noise</ol>
+</li>
+
 <h4>Attributions</h4>
 <p> All art made by me</p>
 <p>No AI was used for this project.</p>
