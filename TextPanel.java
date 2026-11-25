@@ -2,32 +2,44 @@ import java.awt.*; import java.awt.event.*;
 import javax.swing.*; import javax.swing.filechooser.*; import javax.swing.text.*;
 import java.util.*; import java.io.File;
 public class TextPanel extends JPanel
-{
-     //All the widgets for the Panel
-     
-     //Basic setup, like the text input field, and the header for the file.
-     @SuppressWarnings("FieldMayBeFinal")
-     private JLabel Header = new JLabel("Notepad");
-     private JScrollPane NotePad = new JScrollPane();
-     //Notepad, and text color
-     private JTextPane Notes = new JTextPane();
-     private JColorChooser TextColor = new JColorChooser();
-     
-     public TextPanel()
-     {    
+{   
+private static Color color_of_text = (Color.black);
+    //TODO: put the colorchooser in its own class, its too big for the window
+    public TextPanel()
+    {
+        //Basic setup, like the text input field, and the label for the widget
+        JLabel Header = new JLabel("Notepad");
+        JScrollPane NotePad = new JScrollPane();
+        
+        //Notepad, and text color
+        JTextPane Notes = new JTextPane();
+         
+        
+        
+        
         //JButtons for loading text, and setting color
         JButton Color = new JButton("Pick text color");
         JButton Load = new JButton("Load Text");
+        
+        //Adding all of the basic elements to the widget.
+        add(Header);
+        add(Color);
+        add(Load); 
+        add(NotePad);
+        add(Notes);
+        
 
-        //Handling text attirbutes
-        SimpleAttributeSet attributes = new SimpleAttributeSet();
-        Style style = Notes.addStyle("Style", null );
-        StyleConstants.setCharacterAttributes(attributes, true);
+        //? This handles the colored text. Currently, It's not functional, so I'm commenting it out for now to see if theres anything I can do about it.
+        //? Make sure to take another look at this later too, I do still want to add this feature. 
+        /*Handling text attributes
+        NotePad.add(Notes);
+        Style style = Notes.addStyle("Style", null);
+        //! Null pointer exception -> StyleConstants.setForeground(style, null);
         StyledDocument document = Notes.getStyledDocument();
-        //Get custom font
+        Get custom font
+        */
           
-          
-        //For Loading text from files
+        //For loading text from files
         Load.addActionListener((ActionEvent e) -> 
         {
             JFileChooser Filepick = new JFileChooser();
@@ -54,18 +66,33 @@ public class TextPanel extends JPanel
         //For custom text color
         Color.addActionListener((ActionEvent e) -> 
         {
-            System.out.println("Change color.");
-            Color color_of_text = TextColor.getColor();
-            StyleConstants.setForeground(style, color_of_text);
-            try {document.insertString(document.getLength(), Notes.getText(), style);}
-            catch(BadLocationException f){}
+            //This code block SHOULD make a new window, and show the colorpanel inside of it to let the user pick whatever they want...
+            JWindow ColorWindow = new JWindow();
+            
+            //Creating and adding the elements.
+            JLabel Title = new JLabel("Pick your color!");
+            JColorChooser TextColor = new JColorChooser();
+            ColorWindow.add(Title);
+            ColorWindow.add(TextColor); 
+            
+            //Stores the new color for outside use!
+            TextPanel.color_of_text = TextColor.getColor();
+            
+            //Final touches on the window
+            ColorWindow.pack();
+            ColorWindow.setVisible(true);
+
+            //*This code is supposed to set the texts color! (Commented out for now, will revisit later.) 
+            //StyleConstants.setForeground(style, color_of_text);
+            //try {document.insertString(document.getLength(), Notes.getText(), style);}
+            //catch(BadLocationException f){}
         });     
         
         
         //Buttons + Colorpicker to set the text color
         //Adding to panel/ScrollPane, and handling other things.
  
-        NotePad.add(Notes);
-        add(Header); add(Color); add(TextColor); add(Load); add(NotePad);
+        
+        
    }
 }

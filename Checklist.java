@@ -1,21 +1,25 @@
+import java.awt.event.*;
 import javax.swing.*;
-
+//TODO: Fix error that exits out of the entire program when the JOptionPane is closed.
 public class Checklist extends JPanel
 {
-     //TODO: Make a JTable, a JTextField, and a JCheckBox, so the user can make a little todo list.
      public Checklist()
      {
+          JPanel ChecklistPanel = new JPanel();
+          ChecklistPanel.setLayout(new BoxLayout(ChecklistPanel, BoxLayout.PAGE_AXIS));
           //Header for the todo list.
           JLabel todo = new JLabel("TO DO list:");
-          add(todo);
+          ChecklistPanel.add(todo);
 
           JButton newTask = new JButton("Add a new task!");
+          ChecklistPanel.add(newTask);
+          
           newTask.addActionListener((ActionEvent e) -> 
           {
-               String (userTask) = JOptionPane.showInputDialog("What task would you like to add?",null);
-
-               
+               String userTask = JOptionPane.showInputDialog("What task would you like to add?",null);
+               JCheckBox task = new JCheckBox(userTask);
+               ChecklistPanel.add(task);
           });
-
+          add(ChecklistPanel);
      }  
 }
