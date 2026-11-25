@@ -10,7 +10,7 @@ public class PlanningPanel extends JWindow
      {
           
           //Basic setup for the window, like the size, background, and it's title.
-          //setSize(450, WindowSize.width);
+          setSize(250, WindowSize.width);
           setAlwaysOnTop(true);
           //! Issue with layout manager! setLayout(new BoxLayout(rootPane, BoxLayout.PAGE_AXIS));
           //TODO: Use an ImageIcon (https://docs.oracle.com/javase/8/docs/api/javax/swing/ImageIcon.html) to add in a scrolling background (Think something like wii fits background, white, with a grey grid moving diagonally.)

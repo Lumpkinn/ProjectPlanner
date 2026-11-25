@@ -9,13 +9,13 @@ private static Color color_of_text = (Color.black);
     {
         //Basic setup, like the text input field, and the label for the widget
         JLabel Header = new JLabel("Notepad");
-        JScrollPane NotePad = new JScrollPane();
+        
         
         //Notepad, and text color
-        JTextPane Notes = new JTextPane();
-         
-        
-        
+        JTextArea Notes = new JTextArea("Add text here!");
+        Notes.setEditable(true);
+        //!THE JSCROLLPANE DOESN'T SUPPORT TEXT COLOR!!!
+        JScrollPane NotePad = new JScrollPane(Notes); 
         
         //JButtons for loading text, and setting color
         JButton Color = new JButton("Pick text color");
@@ -26,7 +26,6 @@ private static Color color_of_text = (Color.black);
         add(Color);
         add(Load); 
         add(NotePad);
-        add(Notes);
         
 
         //? This handles the colored text. Currently, It's not functional, so I'm commenting it out for now to see if theres anything I can do about it.
@@ -66,8 +65,10 @@ private static Color color_of_text = (Color.black);
         //For custom text color
         Color.addActionListener((ActionEvent e) -> 
         {
-            //This code block SHOULD make a new window, and show the colorpanel inside of it to let the user pick whatever they want...
-            JWindow ColorWindow = new JWindow();
+            //This code block makes a new window, and show the colorpanel inside of it to let the user pick whatever they want...
+            JFrame ColorWindow = new JFrame("Pick a color");
+            ColorWindow.setUndecorated(false);
+            ColorWindow.setResizable(false);
             
             //Creating and adding the elements.
             JLabel Title = new JLabel("Pick your color!");
@@ -77,8 +78,9 @@ private static Color color_of_text = (Color.black);
             
             //Stores the new color for outside use!
             TextPanel.color_of_text = TextColor.getColor();
-            
+
             //Final touches on the window
+            ColorWindow.setLocation(300, 100);
             ColorWindow.pack();
             ColorWindow.setVisible(true);
 
