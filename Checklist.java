@@ -18,9 +18,16 @@ public class Checklist extends JPanel
           newTask.addActionListener((ActionEvent e) -> 
           {
                String userTask = JOptionPane.showInputDialog("What task would you like to add?",null);
-               JCheckBox task = new JCheckBox(userTask);
-               ChecklistPanel.add(task);
+               if (userTask != null)
+               {
+                    JCheckBox task = new JCheckBox(userTask);
+                    ChecklistPanel.add(task);
+                    System.out.println(userTask);
+                    ChecklistPanel.revalidate();
+                    ChecklistPanel.repaint();
+               }
           });
+
           add(ChecklistPanel);
      }  
 }

@@ -62,7 +62,7 @@ private static Color color_of_text = (Color.black);
           });
 
 
-        //For custom text color
+        //For custom text color, adds a custom window holding the Colorpicker to set the text color (You should probably have a button to confirm the color. )
         Color.addActionListener((ActionEvent e) -> 
         {
             
@@ -91,11 +91,8 @@ private static Color color_of_text = (Color.black);
             //catch(BadLocationException f){}
         });     
         
-        
-        //Buttons + Colorpicker to set the text color
-        //Adding to panel/ScrollPane, and handling other things.
- 
-        
-        
-   }
+
+    
+    
+    }
 }
